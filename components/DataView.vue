@@ -92,184 +92,92 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<div class="content-body">
-		<div class="header">
-			<div class="header-left">
-				<span>水质情况实时监测预警系统</span>
+	<div class="absolute w-full h-full bg-[#0d325f]">
+		<!-- Header -->
+		<header class="h-[70px] w-full">
+			<div class="w-full float-left leading-[70px]">
+				<span class="text-white font-bold text-2xl tracking-[2px] px-5">
+					水质情况实时监测预警系统
+				</span>
 			</div>
-		</div>
+		</header>
 
-		<div class="content">
-			<div class="content-con">
-				<div class="left-body">
-					<div class="left-top public-bg">
-						<div class="public-title">重点水质量检测区</div>
-						<div class="top-body">
+		<!-- Main Content -->
+		<main class="w-full h-[calc(100%-75px)] absolute">
+			<div class="h-full">
+				<!-- Left Panel -->
+				<aside class="w-[22%] h-full float-left mx-[0.3%]">
+					<!-- Top Section -->
+					<section class="w-full h-[27%] bg-[rgba(12,26,63,0.3)]">
+						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+							重点水质量检测区
+						</div>
+						<div class="w-full h-[calc(100%-30px)]">
 							<WaterStats :data="waterStatsData" />
 						</div>
-					</div>
-					<div class="left-con public-bg">
-						<div class="public-title">水质量分布情况</div>
-						<div class="title-nav">
+					</section>
+					
+					<!-- Middle Section -->
+					<section class="w-full h-[38%] mt-[1.6%] bg-[rgba(12,26,63,0.3)]">
+						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+							水质量分布情况
+						</div>
+						<div class="w-full h-[calc(100%-30px)]">
 							<RadarChart ref="radarChartRef" />
 						</div>
-					</div>
-					<div class="left-bottom public-bg">
-						<div class="public-title">企业污染排放情况</div>
-						<div class="title-nav">
+					</section>
+					
+					<!-- Bottom Section -->
+					<section class="w-full h-[32%] mt-[1.6%] bg-[rgba(12,26,63,0.3)]">
+						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+							企业污染排放情况
+						</div>
+						<div class="w-full h-[calc(100%-30px)]">
 							<PollutionBarChart ref="pollutionBarChartRef" />
 						</div>
-					</div>
-				</div>
+					</section>
+				</aside>
 
-				<div class="center-body">
+				<!-- Center Panel -->
+				<main class="w-[54%] h-full mx-[0.3%] float-left">
 					<ChinaMapChart ref="chinaMapChartRef" />
-				</div>
+				</main>
 
-				<div class="right-body">
-					<div class="right-top public-bg">
-						<div class="public-title">水质污染TOP5</div>
-						<div class="title-nav">
+				<!-- Right Panel -->
+				<aside class="w-[22%] h-full float-right mx-[0.3%]">
+					<!-- Top Section -->
+					<section class="w-full h-[32%] bg-[rgba(12,26,63,0.3)]">
+						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+							水质污染TOP5
+						</div>
+						<div class="w-full h-[calc(100%-30px)]">
 							<PollutionTop5 :data="pollutionTop5Data" />
 						</div>
-					</div>
-					<div class="right-con public-bg">
-						<div class="public-title">水质类别占比</div>
-						<div class="title-nav">
+					</section>
+					
+					<!-- Middle Section -->
+					<section class="w-full h-[25%] mt-[2%] bg-[rgba(12,26,63,0.3)]">
+						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+							水质类别占比
+						</div>
+						<div class="w-full h-[calc(100%-30px)]">
 							<RingChart ref="ringChartRef" />
 						</div>
-					</div>
-					<div class="right-bottom public-bg">
-						<div class="public-title">主要地区水流量</div>
-						<div class="title-nav">
+					</section>
+					
+					<!-- Bottom Section -->
+					<section class="w-full h-[39%] mt-[2%] bg-[rgba(12,26,63,0.3)]">
+						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+							主要地区水流量
+						</div>
+						<div class="w-full h-[calc(100%-30px)]">
 							<LineChart ref="lineChartRef" />
 						</div>
-					</div>
-				</div>
+					</section>
+				</aside>
 			</div>
-		</div>
+		</main>
 	</div>
 </template>
 
-<style>
-.public-bg {
-	background: rgba(12, 26, 63, 0.3);
-}
 
-.public-title {
-	width: calc(100% - 20px);
-	height: 30px;
-	position: relative;
-	top: 0;
-	left: 5px;
-	color: white;
-	padding-left: 16px;
-	line-height: 30px;
-	font-size: 13px;
-}
-.public-title:before {
-	width: 4px;
-	height: 20px;
-	top: 5px;
-	position: absolute;
-	content: '';
-	background: #2997e4;
-	border-radius: 2px;
-	left: 5px;
-}
-
-.content-body {
-	width: 100%;
-	height: 100%;
-	background: #0d325f;
-	background-size: 100% 100%;
-	position: absolute;
-}
-
-.header {
-	height: 70px;
-	width: 100%;
-	/*    border: 1px solid red;*/
-}
-.header .header-left {
-	width: 100%;
-	float: left;
-	line-height: 70px;
-}
-.header .header-left span {
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 24px;
-	letter-spacing: 2px;
-	padding: 0 20px;
-}
-.content {
-	width: 100%;
-	height: calc(100% - 75px);
-	position: absolute;
-}
-.content .content-con {
-	height: 100%;
-}
-.content .content-con .left-body {
-	width: 22%;
-	height: 100%;
-	float: left;
-	margin: 0 0.3%;
-}
-.left-body .left-top {
-	width: 100%;
-	height: 27%;
-}
-.left-body .left-top .top-body {
-	width: 100%;
-	height: calc(100% - 30px);
-}
-.left-body .left-con {
-	width: 100%;
-	height: 38%;
-	margin-top: 1.6%;
-}
-
-.left-body .left-bottom {
-	width: 100%;
-	height: 32%;
-	margin-top: 1.6%;
-}
-
-.title-nav {
-	width: 100%;
-	height: calc(100% - 30px);
-}
-
-.center-body {
-	width: 54%;
-	height: 100%;
-	margin: 0 0.3%;
-	float: left;
-}
-
-.right-body {
-	width: 22%;
-	height: 100%;
-	float: right;
-	margin: 0 0.3%;
-}
-
-.right-body .right-top {
-	width: 100%;
-	height: 32%;
-}
-
-.right-body .right-con {
-	width: 100%;
-	height: 25%;
-	margin-top: 2%;
-}
-
-.right-body .right-bottom {
-	width: 100%;
-	height: 39%;
-	margin-top: 2%;
-}
-</style>

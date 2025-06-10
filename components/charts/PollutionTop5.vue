@@ -59,102 +59,39 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-	<div class="pollution-top5">
-		<div class="top5-ul">
-			<ul>
-				<li v-for="item in props.data" :key="item.rank">
-					<span>{{ item.rank }}</span>
-					<span>{{ item.level }}</span>
-					<span>{{ item.province }}</span>
-					<span>{{ item.city }}</span>
-					<span>{{ item.status }}</span>
-					<span>{{ item.distance }}</span>
+	<div class="w-full h-full">
+		<div class="w-[calc(100%-20px)] h-[calc(100%-30px)] p-[10px]">
+			<ul class="w-full h-full list-none m-0 p-0">
+				<li 
+					v-for="(item, index) in props.data" 
+					:key="item.rank"
+					class="w-full h-[20%] text-white leading-[68px] justify-center"
+				>
+					<span class="ml-[3%] text-xl text-[#eb6841] italic inline-block text-center">
+						{{ item.rank }}
+					</span>
+					<span 
+						class="ml-[3%] text-sm w-[10%] inline-block text-center h-[30px] leading-[30px] align-middle rounded-[5px] text-white"
+						:class="index < 3 ? 'bg-[#d89346]' : 'bg-[#1db5ea]'"
+					>
+						{{ item.level }}
+					</span>
+					<span class="ml-[3%] text-sm inline-block text-center">
+						{{ item.province }}
+					</span>
+					<span class="ml-[3%] text-sm inline-block text-center">
+						{{ item.city }}
+					</span>
+					<span class="ml-[3%] text-sm inline-block text-center">
+						{{ item.status }}
+					</span>
+					<span class="ml-[3%] text-sm inline-block text-center">
+						{{ item.distance }}
+					</span>
 				</li>
 			</ul>
 		</div>
 	</div>
 </template>
 
-<style scoped>
-.pollution-top5 {
-	width: 100%;
-	height: 100%;
-}
 
-.top5-ul {
-	width: calc(100% - 20px);
-	height: calc(100% - 30px);
-	padding: 10px;
-}
-
-.top5-ul ul {
-	width: 100%;
-	height: 100%;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.top5-ul ul > li {
-	width: 100%;
-	height: 20%;
-	color: #ffffff;
-	line-height: 68px;
-	justify-content: center;
-}
-
-.top5-ul ul li span {
-	margin-left: 3%;
-	font-size: 14px;
-}
-
-.top5-ul ul li span:nth-child(1) {
-	color: #eb6841;
-	font-style: oblique;
-	display: inline-block;
-	text-align: center;
-	font-size: 20px;
-}
-
-.top5-ul ul li span:nth-child(2) {
-	width: 10%;
-	display: inline-block;
-	text-align: center;
-	height: 30px;
-	line-height: 30px;
-	vertical-align: center;
-	border-radius: 5px;
-	color: #ffffff;
-}
-
-.top5-ul ul li:nth-child(1) span:nth-child(2),
-.top5-ul ul li:nth-child(2) span:nth-child(2),
-.top5-ul ul li:nth-child(3) span:nth-child(2) {
-	background: #d89346;
-}
-
-.top5-ul ul li:nth-child(4) span:nth-child(2),
-.top5-ul ul li:nth-child(5) span:nth-child(2) {
-	background: #1db5ea;
-}
-
-.top5-ul ul li span:nth-child(3) {
-	display: inline-block;
-	text-align: center;
-}
-
-.top5-ul ul li span:nth-child(4) {
-	display: inline-block;
-	text-align: center;
-}
-
-.top5-ul ul li span:nth-child(5) {
-	display: inline-block;
-	text-align: center;
-}
-
-.top5-ul ul li span:nth-child(6) {
-	display: inline-block;
-	text-align: center;
-}
-</style>

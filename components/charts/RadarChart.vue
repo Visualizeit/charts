@@ -162,12 +162,7 @@ defineExpose({
 </script>
 
 <template>
-	<div ref="chartRef" class="chart-container" />
+	<div ref="chartRef" class="w-full h-full" />
 </template>
 
-<style scoped>
-.chart-container {
-	width: 100%;
-	height: 100%;
-}
-</style>
+

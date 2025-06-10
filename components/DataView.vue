@@ -9,11 +9,11 @@ import PollutionTop5 from './charts/PollutionTop5.vue'
 import WaterStats from './charts/WaterStats.vue'
 
 // 图表组件引用
-const radarChartRef = ref(null)
-const pollutionBarChartRef = ref(null)
-const chinaMapChartRef = ref(null)
-const ringChartRef = ref(null)
-const lineChartRef = ref(null)
+const radarChartRef = useTemplateRef('radarChartRef')
+const pollutionBarChartRef = useTemplateRef('pollutionBarChartRef')
+const chinaMapChartRef = useTemplateRef('chinaMapChartRef')
+const ringChartRef = useTemplateRef('ringChartRef')
+const lineChartRef = useTemplateRef('lineChartRef')
 
 // 水质污染TOP5数据
 const pollutionTop5Data = ref([
@@ -92,85 +92,97 @@ onUnmounted(() => {
 </script>
 
 <template>
-	<div class="absolute w-full h-full bg-[#0d325f]">
+	<div class="absolute h-full w-full bg-[#0d325f]">
 		<!-- Header -->
 		<header class="h-[70px] w-full">
-			<div class="w-full float-left leading-[70px]">
-				<span class="text-white font-bold text-2xl tracking-[2px] px-5">
+			<div class="float-left w-full leading-[70px]">
+				<span class="px-5 text-2xl font-bold tracking-[2px] text-white">
 					水质情况实时监测预警系统
 				</span>
 			</div>
 		</header>
 
 		<!-- Main Content -->
-		<main class="w-full h-[calc(100%-75px)] absolute">
+		<main class="absolute h-[calc(100%-75px)] w-full">
 			<div class="h-full">
 				<!-- Left Panel -->
-				<aside class="w-[22%] h-full float-left mx-[0.3%]">
+				<aside class="float-left mx-[0.3%] h-full w-[22%]">
 					<!-- Top Section -->
-					<section class="w-full h-[27%] bg-[rgba(12,26,63,0.3)]">
-						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+					<section class="h-[27%] w-full bg-[rgba(12,26,63,0.3)]">
+						<div
+							class="relative top-0 left-[5px] h-[30px] w-[calc(100%-20px)] pl-4 text-[13px] leading-[30px] text-white before:absolute before:top-[5px] before:left-[5px] before:h-5 before:w-1 before:rounded-[2px] before:bg-[#2997e4] before:content-['']"
+						>
 							重点水质量检测区
 						</div>
-						<div class="w-full h-[calc(100%-30px)]">
+						<div class="h-[calc(100%-30px)] w-full">
 							<WaterStats :data="waterStatsData" />
 						</div>
 					</section>
-					
+
 					<!-- Middle Section -->
-					<section class="w-full h-[38%] mt-[1.6%] bg-[rgba(12,26,63,0.3)]">
-						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+					<section class="mt-[1.6%] h-[38%] w-full bg-[rgba(12,26,63,0.3)]">
+						<div
+							class="relative top-0 left-[5px] h-[30px] w-[calc(100%-20px)] pl-4 text-[13px] leading-[30px] text-white before:absolute before:top-[5px] before:left-[5px] before:h-5 before:w-1 before:rounded-[2px] before:bg-[#2997e4] before:content-['']"
+						>
 							水质量分布情况
 						</div>
-						<div class="w-full h-[calc(100%-30px)]">
+						<div class="h-[calc(100%-30px)] w-full">
 							<RadarChart ref="radarChartRef" />
 						</div>
 					</section>
-					
+
 					<!-- Bottom Section -->
-					<section class="w-full h-[32%] mt-[1.6%] bg-[rgba(12,26,63,0.3)]">
-						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+					<section class="mt-[1.6%] h-[32%] w-full bg-[rgba(12,26,63,0.3)]">
+						<div
+							class="relative top-0 left-[5px] h-[30px] w-[calc(100%-20px)] pl-4 text-[13px] leading-[30px] text-white before:absolute before:top-[5px] before:left-[5px] before:h-5 before:w-1 before:rounded-[2px] before:bg-[#2997e4] before:content-['']"
+						>
 							企业污染排放情况
 						</div>
-						<div class="w-full h-[calc(100%-30px)]">
+						<div class="h-[calc(100%-30px)] w-full">
 							<PollutionBarChart ref="pollutionBarChartRef" />
 						</div>
 					</section>
 				</aside>
 
 				<!-- Center Panel -->
-				<main class="w-[54%] h-full mx-[0.3%] float-left">
+				<main class="float-left mx-[0.3%] h-full w-[54%]">
 					<ChinaMapChart ref="chinaMapChartRef" />
 				</main>
 
 				<!-- Right Panel -->
-				<aside class="w-[22%] h-full float-right mx-[0.3%]">
+				<aside class="float-right mx-[0.3%] h-full w-[22%]">
 					<!-- Top Section -->
-					<section class="w-full h-[32%] bg-[rgba(12,26,63,0.3)]">
-						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+					<section class="h-[32%] w-full bg-[rgba(12,26,63,0.3)]">
+						<div
+							class="relative top-0 left-[5px] h-[30px] w-[calc(100%-20px)] pl-4 text-[13px] leading-[30px] text-white before:absolute before:top-[5px] before:left-[5px] before:h-5 before:w-1 before:rounded-[2px] before:bg-[#2997e4] before:content-['']"
+						>
 							水质污染TOP5
 						</div>
-						<div class="w-full h-[calc(100%-30px)]">
+						<div class="h-[calc(100%-30px)] w-full">
 							<PollutionTop5 :data="pollutionTop5Data" />
 						</div>
 					</section>
-					
+
 					<!-- Middle Section -->
-					<section class="w-full h-[25%] mt-[2%] bg-[rgba(12,26,63,0.3)]">
-						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+					<section class="mt-[2%] h-[25%] w-full bg-[rgba(12,26,63,0.3)]">
+						<div
+							class="relative top-0 left-[5px] h-[30px] w-[calc(100%-20px)] pl-4 text-[13px] leading-[30px] text-white before:absolute before:top-[5px] before:left-[5px] before:h-5 before:w-1 before:rounded-[2px] before:bg-[#2997e4] before:content-['']"
+						>
 							水质类别占比
 						</div>
-						<div class="w-full h-[calc(100%-30px)]">
+						<div class="h-[calc(100%-30px)] w-full">
 							<RingChart ref="ringChartRef" />
 						</div>
 					</section>
-					
+
 					<!-- Bottom Section -->
-					<section class="w-full h-[39%] mt-[2%] bg-[rgba(12,26,63,0.3)]">
-						<div class="relative w-[calc(100%-20px)] h-[30px] top-0 left-[5px] text-white pl-4 leading-[30px] text-[13px] before:content-[''] before:w-1 before:h-5 before:top-[5px] before:absolute before:bg-[#2997e4] before:rounded-[2px] before:left-[5px]">
+					<section class="mt-[2%] h-[39%] w-full bg-[rgba(12,26,63,0.3)]">
+						<div
+							class="relative top-0 left-[5px] h-[30px] w-[calc(100%-20px)] pl-4 text-[13px] leading-[30px] text-white before:absolute before:top-[5px] before:left-[5px] before:h-5 before:w-1 before:rounded-[2px] before:bg-[#2997e4] before:content-['']"
+						>
 							主要地区水流量
 						</div>
-						<div class="w-full h-[calc(100%-30px)]">
+						<div class="h-[calc(100%-30px)] w-full">
 							<LineChart ref="lineChartRef" />
 						</div>
 					</section>
@@ -179,5 +191,3 @@ onUnmounted(() => {
 		</main>
 	</div>
 </template>
-
-

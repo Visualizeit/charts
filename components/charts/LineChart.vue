@@ -7,9 +7,9 @@ let chartInstance: echarts.ECharts | null = null
 
 const initChart = () => {
 	if (!chartRef.value) return
-	
+
 	chartInstance = echarts.init(chartRef.value)
-	
+
 	const dataObj = {
 		year: ['2015', '2016', '2017', '2018', '2019', '2020'],
 		data: {
@@ -20,7 +20,7 @@ const initChart = () => {
 			],
 		},
 	}
-	
+
 	const dataArr = dataObj.data.value.map((item) => ({
 		name: item.name,
 		type: 'line',
@@ -39,7 +39,7 @@ const initChart = () => {
 			},
 		},
 	}))
-	
+
 	const option = {
 		color: ['#f0c725', '#16f892'],
 		title: {
@@ -100,17 +100,12 @@ onUnmounted(() => {
 })
 
 defineExpose({
-	resize: () => chartInstance?.resize()
+	resize: () => chartInstance?.resize(),
 })
 </script>
 
 <template>
-	<div ref="chartRef" class="chart-container" />
+	<div ref="chartRef" class="size-full" />
 </template>
 
-<style scoped>
-.chart-container {
-	width: 100%;
-	height: 100%;
-}
-</style>
+<style scoped></style>

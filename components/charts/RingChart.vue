@@ -7,9 +7,9 @@ let chartInstance: echarts.ECharts | null = null
 
 const initChart = () => {
 	if (!chartRef.value) return
-	
+
 	chartInstance = echarts.init(chartRef.value)
-	
+
 	const dataStyle = {
 		normal: {
 			label: { show: false },
@@ -18,7 +18,7 @@ const initChart = () => {
 			shadowColor: '#203665',
 		},
 	}
-	
+
 	const option = {
 		series: [
 			{
@@ -215,17 +215,12 @@ onUnmounted(() => {
 })
 
 defineExpose({
-	resize: () => chartInstance?.resize()
+	resize: () => chartInstance?.resize(),
 })
 </script>
 
 <template>
-	<div ref="chartRef" class="chart-container" />
+	<div ref="chartRef" class="size-full" />
 </template>
 
-<style scoped>
-.chart-container {
-	width: 100%;
-	height: 100%;
-}
-</style>
+<style scoped></style>

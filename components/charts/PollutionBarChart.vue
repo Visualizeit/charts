@@ -7,17 +7,17 @@ let chartInstance: echarts.ECharts | null = null
 
 const initChart = () => {
 	if (!chartRef.value) return
-	
+
 	chartInstance = echarts.init(chartRef.value)
-	
+
 	const salvProName = ['企业总数', '废气企业', '废水企业', '铅污染', '铬污染']
 	const salvProValue = [117, 74, 72, 67, 55]
 	const salvProMax = []
-	
+
 	for (let i = 0; i < salvProValue.length; i++) {
 		salvProMax.push(salvProValue[0])
 	}
-	
+
 	const option = {
 		grid: {
 			left: '2%',
@@ -101,17 +101,12 @@ onUnmounted(() => {
 })
 
 defineExpose({
-	resize: () => chartInstance?.resize()
+	resize: () => chartInstance?.resize(),
 })
 </script>
 
 <template>
-	<div ref="chartRef" class="chart-container" />
+	<div ref="chartRef" class="size-full" />
 </template>
 
-<style scoped>
-.chart-container {
-	width: 100%;
-	height: 100%;
-}
-</style>
+<style scoped></style>

@@ -1,16 +1,20 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps<{ data: DashboardData }>()
+</script>
 
 <template>
 	<div class="flex flex-col gap-4">
-		<p class="text-white text-2xl text-center">今日新增加盟商列表</p>
+		<p class="text-center text-2xl text-white">区域门店数据</p>
 		<ul>
-			<li v-for="i in 3" :key="i" class="flex justify-between text-white p-4 bg-neutral-400 even:bg-neutral-800">
-                <p>{{ i }}</p>
-				<p>今日增加加盟商</p>
-				<p>深圳龙华上塘</p>
-                <p>优秀</p>
+			<li
+				v-for="(item, index) in props.data.area_data"
+				:key="index"
+				class="flex justify-between bg-neutral-400 p-4 text-white even:bg-neutral-800"
+			>
+				<p>{{ item.store_title }}</p>
+				<p>{{ item.area }}</p>
+				<p>{{ item.count }}</p>
 			</li>
-	
 		</ul>
 	</div>
 </template>

@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps<{ data: DashboardData }>()
+</script>
 
 <template>
 	<DataBox title="天使之笔仪器">
@@ -16,21 +18,13 @@
 		<div class="flex flex-col gap-4 text-white">
 			<p>热门门店（已购/已用）</p>
 			<ul class="flex flex-col gap-2">
-				<li class="flex justify-between">
-					<p>深圳龙华上塘</p>
-					<p>50/22</p>
-				</li>
-				<li class="flex justify-between">
-					<p>深圳龙华上塘</p>
-					<p>50/22</p>
-				</li>
-				<li class="flex justify-between">
-					<p>深圳龙华上塘</p>
-					<p>50/22</p>
-				</li>
-				<li class="flex justify-between">
-					<p>深圳龙华上塘</p>
-					<p>50/22</p>
+				<li
+					v-for="item in props.data.device_store_data"
+					:key="item.store_name"
+					class="flex justify-between"
+				>
+					<p>{{ item.store_name }}</p>
+					<p>{{ item.open_times }}/{{ item.total_times }}</p>
 				</li>
 			</ul>
 		</div>

@@ -1,8 +1,10 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const props = defineProps<{ data: DashboardData }>()
+</script>
 
 <template>
 	<DataBox title="复购产品概况">
-		<div class="grid grid-cols-2 text-white gap-6">
+		<div class="grid grid-cols-2 gap-6 text-white">
 			<div class="flex items-center justify-center gap-2">
 				<p>今日</p>
 				<p class="text-3xl text-red-500 italic">122</p>

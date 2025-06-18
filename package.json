@@ -10,9 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@number-flow/vue": "^0.4.8",
     "@nuxt/eslint": "1.4.1",
     "echarts": "^5.6.0",
     "eslint": "^9.28.0",
+    "ky": "^1.8.1",
     "nuxt": "^3.17.5",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1"

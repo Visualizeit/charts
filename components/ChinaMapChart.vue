@@ -157,24 +157,6 @@ const initChart = () => {
 				symbolSize: [5, 5],
 				color: '#ff8003',
 				opacity: 1,
-				label: {
-					show: true,
-					padding: [10, 20],
-					color: '#fff',
-					backgroundColor: '#1a3961',
-					borderColor: '#aee9fb',
-					borderWidth: 1,
-					borderRadius: 6,
-					formatter(params) {
-						let arr = [
-							params.name,
-							'废水污染：' + params.value[1] + '家',
-							'废气污染：' + params.value[0] + '家',
-						]
-						return arr.join('\n')
-					},
-					textStyle: { align: 'left', lineHeight: 20 },
-				},
 				lineStyle: { type: 'solid', color: '#fff', width: 0.5, opacity: 1 },
 				data: LableData,
 			},
@@ -185,6 +167,7 @@ const initChart = () => {
 
 const handleResize = () => {
 	chartInstance?.resize()
+	console.log('resize')
 }
 
 onMounted(() => {
@@ -195,10 +178,6 @@ onMounted(() => {
 onUnmounted(() => {
 	chartInstance?.dispose()
 	window.removeEventListener('resize', handleResize)
-})
-
-defineExpose({
-	resize: () => chartInstance?.resize(),
 })
 </script>
 

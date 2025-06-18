@@ -77,12 +77,34 @@ const initChart = () => {
 			layoutSize: '100%',
 			itemStyle: {
 				normal: {
-					shadowColor: '#276fce',
-					shadowOffsetX: 0,
-					shadowOffsetY: 15,
-					opacity: 0.5,
+					borderColor: 'rgba(147, 235, 248, 1)',
+					borderWidth: 1,
+					areaColor: {
+						type: 'radial',
+						x: 0.5,
+						y: 0.5,
+						r: 0.8,
+						colorStops: [
+							{
+								offset: 0,
+								color: 'rgba(175,238,238, 0)', // 0% 处的颜色
+							},
+							{
+								offset: 1,
+								color: 'rgba(47,79,79, .1)', // 100% 处的颜色
+							},
+						],
+						globalCoord: false, // 缺省为 false
+					},
+					shadowColor: 'rgba(128, 217, 248, 1)',
+					shadowOffsetX: -2,
+					shadowOffsetY: 2,
+					shadowBlur: 10,
 				},
-				emphasis: { areaColor: '#276fce' },
+				emphasis: {
+					areaColor: '#389BB7',
+					borderWidth: 0,
+				},
 			},
 			regions: [
 				{
@@ -97,23 +119,6 @@ const initChart = () => {
 			],
 		},
 		series: [
-			{
-				type: 'map',
-				mapType: 'china',
-				aspectScale: 0.85,
-				layoutCenter: ['50%', '50%'],
-				layoutSize: '100%',
-				zoom: 1,
-				scaleLimit: { min: 1, max: 2 },
-				itemStyle: {
-					normal: {
-						areaColor: '#0c274b',
-						borderColor: '#1cccff',
-						borderWidth: 1.5,
-					},
-					emphasis: { areaColor: '#02102b', label: { color: '#fff' } },
-				},
-			},
 			{
 				name: '首都',
 				type: 'scatter',

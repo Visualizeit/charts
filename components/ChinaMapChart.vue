@@ -18,19 +18,19 @@ const initChart = () => {
 	chartInstance = echarts.init(chartRef.value)
 
 	const data = [
-		{ name: '北京', value: [116.24, 39.55, 150] }, // 黄色范围
-		{ name: '广东', value: [114.271522, 22.753644, 800] }, // 红色范围（深圳属于广东）
-		{ name: '重庆', value: [106.54, 29.59, 50] }, // 蓝色范围
-		{ name: '浙江', value: [120.19, 30.26, 300] }, // 黄色范围
-		{ name: '上海', value: [121.4648, 31.2891, 600] }, // 红色范围
+		{ name: '北京', value: [116.24, 39.55, 25000] }, // 黄色范围
+		{ name: '广东', value: [114.271522, 22.753644, 80000] }, // 红色范围（深圳属于广东）
+		{ name: '重庆', value: [106.54, 29.59, 5000] }, // 蓝色范围
+		{ name: '浙江', value: [120.19, 30.26, 35000] }, // 黄色范围
+		{ name: '上海', value: [121.4648, 31.2891, 60000] }, // 红色范围
 	]
 
 	// 根据数值映射颜色的函数
 	const getColorByValue = (value) => {
-		if (value >= 0 && value <= 100) return '#FD8918' // 蓝色
-		if (value > 100 && value <= 500) return '#F6FD18' // 黄色
-		if (value > 500 && value <= 1000) return '#18DBFD' // 红色
-		return '#FD8918' // 默认蓝色
+		if (value >= 0 && value <= 10000) return '#18DBFD' // 蓝色
+		if (value > 10000 && value <= 50000) return '#F6FD18' // 黄色
+		if (value > 50000 && value <= 100000) return '#FD8918' // 橙色/红色
+		return '#18DBFD' // 默认蓝色
 	}
 
 	// 地图区域数据，包含颜色映射
@@ -76,17 +76,18 @@ const initChart = () => {
 		visualMap: {
 			type: 'piecewise',
 			min: 0,
-			max: 1000,
+			max: 100000,
 			left: 256,
 			bottom: 100,
 			orient: 'vertical',
+			inverse: true,
 			itemWidth: 20,
 			itemHeight: 14,
 			itemGap: 8,
 			pieces: [
-				{ min: 0, max: 100, color: '#FD8918', label: '500-1000' },
-				{ min: 100, max: 500, color: '#F6FD18', label: '100-500' },
-				{ min: 500, max: 1000, color: '#18DBFD', label: '0-100' },
+				{ min: 0, max: 10000, color: '#18DBFD', label: '0-10000' },
+				{ min: 10000, max: 50000, color: '#F6FD18', label: '10000-50000' },
+				{ min: 50000, max: 100000, color: '#FD8918', label: '50000-100000' },
 			],
 			textStyle: {
 				color: '#fff',
@@ -103,71 +104,147 @@ const initChart = () => {
 			layoutSize: '120%',
 			itemStyle: {
 				normal: {
-					borderColor: 'rgba(147, 235, 248, 0.8)',
+					borderColor: '#24C1F7FF',
 					borderWidth: 1,
-					areaColor: 'rgba(12, 39, 75, 0.6)',
-					shadowColor: 'rgba(128, 217, 248, 0.6)',
+					areaColor: {
+						type: 'linear',
+						x: 0,
+						y: 0,
+						x2: 1,
+						y2: 1,
+						colorStops: [
+							{
+								offset: 0,
+								color: '#658D9300',
+							},
+							{
+								offset: 1,
+								color: '#93EBF821',
+							},
+						],
+					},
+					shadowColor: '#0499CDBF',
 					shadowOffsetX: -2,
 					shadowOffsetY: 2,
 					shadowBlur: 10,
 				},
 				emphasis: {
-					areaColor: 'rgba(56, 155, 183, 0.7)',
-					borderWidth: 0,
+					areaColor: {
+						type: 'linear',
+						x: 0,
+						y: 0,
+						x2: 1,
+						y2: 1,
+						colorStops: [
+							{
+								offset: 0,
+								color: '#658D9300',
+							},
+							{
+								offset: 1,
+								color: '#93EBF821',
+							},
+						],
+					},
+					borderColor: '#24C1F7FF',
+					borderWidth: 1,
 				},
 			},
-			regions: mapData.map(item => ({
-				name: item.name,
-				itemStyle: {
-					areaColor: item.itemStyle.areaColor,
-					borderColor: item.itemStyle.borderColor,
-					borderWidth: item.itemStyle.borderWidth,
-				}
-			})).concat([
-				{
-					name: '南海诸岛',
+			tooltip: {
+				show: true,
+				textStyle: {
+					fontSize: 12,
+					color: '#FFFFFF',
+				},
+				backgroundColor: '#00000061',
+				borderWidth: 0,
+			},
+			regions: mapData
+				.map((item) => ({
+					name: item.name,
 					itemStyle: {
-						areaColor: 'rgba(147, 235, 248, 0.8)',
-						borderColor: 'rgba(56, 155, 183, 0.7)',
+						areaColor: {
+							type: 'linear',
+							x: 0,
+							y: 0,
+							x2: 1,
+							y2: 1,
+							colorStops: [
+								{
+									offset: 0,
+									color: '#658D9300',
+								},
+								{
+									offset: 1,
+									color: '#93EBF821',
+								},
+							],
+						},
+						borderColor: '#24C1F7FF',
 						borderWidth: 1,
 					},
-				},
-			]),
+				}))
+				.concat([
+					{
+						name: '南海诸岛',
+						itemStyle: {
+							areaColor: {
+								type: 'linear',
+								x: 0,
+								y: 0,
+								x2: 1,
+								y2: 1,
+								colorStops: [
+									{
+										offset: 0,
+										color: '#658D9300',
+									},
+									{
+										offset: 1,
+										color: '#93EBF821',
+									},
+								],
+							},
+							borderColor: '#24C1F7FF',
+							borderWidth: 1,
+						},
+					},
+				]),
 		},
 		series: [
 			{
 				type: 'effectScatter',
 				coordinateSystem: 'geo',
 				zlevel: 2,
-				symbolSize: 6,
+				symbolSize: 4,
 				rippleEffect: {
 					period: 4,
-					scale: 4,
+					scale: 6,
 					brushType: 'fill',
-					color: '#ffffff',
+					color: '#FFFFFF',
 				},
 				label: {
 					normal: {
 						show: true,
 						position: 'right',
 						formatter: '{b}',
-						color: '#ffffff',
+						color: '#FFFFFF',
 						fontWeight: 'bold',
-						fontSize: 16,
+						fontSize: 11,
 					},
 				},
 				data: data,
 				itemStyle: {
 					normal: {
 						show: true,
-						color: '#ffffff',
+						color: '#FFFFFF',
 						shadowBlur: 20,
-						shadowColor: '#ffffff',
+						shadowColor: '#FFFFFF',
 					},
 					emphasis: {
-						color: '#4293b3',
+						color: '#FFFFFF',
 						shadowBlur: 25,
-						shadowColor: '#4293b3',
+						shadowColor: '#FFFFFF',
 					},
 				},
 			},
@@ -177,29 +254,16 @@ const initChart = () => {
 				zlevel: 3,
 				effect: {
 					show: true,
-					period: 2,
-					trailLength: 0.8,
-					color: '#00FFFF',
-					symbolSize: 4,
+					period: 4,
+					trailLength: 0.4,
+					color: '#4FB6D2FF',
+					symbolSize: 7,
 					symbol: 'arrow',
 					shadowBlur: 10,
-					shadowColor: '#00FFFF',
+					shadowColor: '#4FB6D2FF',
 				},
 				lineStyle: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-						{
-							offset: 0,
-							color: '#B0C4DE',
-						},
-						{
-							offset: 0.5,
-							color: '#87CEEB',
-						},
-						{
-							offset: 1,
-							color: '#ADD8E6',
-						},
-					]),
+					color: '#4FB6D2FF',
 					width: 1,
 					curveness: 0.3,
 				},

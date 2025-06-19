@@ -10,7 +10,7 @@ onMounted(() => {
 
 <template>
 	<main
-		class="h-dvh w-dvw bg-[url(background.png)] bg-size-[100%_100%] bg-center"
+		class="h-dvh w-dvw bg-[url(background.png)] bg-size-[100%_100%] bg-center overflow-hidden"
 	>
 		<h1
 			class="absolute top-8 left-1/2 -translate-x-1/2 transform text-5xl tracking-widest text-white"

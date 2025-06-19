@@ -78,7 +78,7 @@ const initChart = () => {
 			min: 0,
 			max: 1000,
 			left: 256,
-			bottom: 120,
+			bottom: 100,
 			orient: 'vertical',
 			itemWidth: 20,
 			itemHeight: 14,
@@ -100,28 +100,12 @@ const initChart = () => {
 			map: 'china',
 			aspectScale: 0.85,
 			layoutCenter: ['50%', '50%'],
-			layoutSize: '100%',
+			layoutSize: '120%',
 			itemStyle: {
 				normal: {
 					borderColor: 'rgba(147, 235, 248, 0.8)',
 					borderWidth: 1,
-					areaColor: {
-						type: 'radial',
-						x: 0.5,
-						y: 0.5,
-						r: 0.8,
-						colorStops: [
-							{
-								offset: 0,
-								color: 'rgba(175,238,238, 0.1)', // 0% 处的颜色，增加透明度
-							},
-							{
-								offset: 1,
-								color: 'rgba(47,79,79, 0.3)', // 100% 处的颜色，增加透明度
-							},
-						],
-						globalCoord: false, // 缺省为 false
-					},
+					areaColor: 'rgba(12, 39, 75, 0.6)',
 					shadowColor: 'rgba(128, 217, 248, 0.6)',
 					shadowOffsetX: -2,
 					shadowOffsetY: 2,
@@ -132,37 +116,25 @@ const initChart = () => {
 					borderWidth: 0,
 				},
 			},
-			regions: [
+			regions: mapData.map(item => ({
+				name: item.name,
+				itemStyle: {
+					areaColor: item.itemStyle.areaColor,
+					borderColor: item.itemStyle.borderColor,
+					borderWidth: item.itemStyle.borderWidth,
+				}
+			})).concat([
 				{
 					name: '南海诸岛',
 					itemStyle: {
-						areaColor: 'rgba(0, 10, 52, 0.6)',
-						borderColor: 'rgba(0, 10, 52, 0.8)',
-						normal: { opacity: 0.6, label: { show: false, color: '#009cc9' } },
+						areaColor: 'rgba(147, 235, 248, 0.8)',
+						borderColor: 'rgba(56, 155, 183, 0.7)',
+						borderWidth: 1,
 					},
-					label: { show: false, color: '#FFFFFF', fontSize: 12 },
 				},
-			],
+			]),
 		},
 		series: [
-			{
-				type: 'map',
-				mapType: 'china',
-				aspectScale: 0.85,
-				layoutCenter: ['50%', '50%'],
-				layoutSize: '100%',
-				zoom: 1,
-				scaleLimit: { min: 1, max: 2 },
-				data: mapData,
-				itemStyle: {
-					normal: {
-						areaColor: 'rgba(12, 39, 75, 0.6)',
-						borderColor: 'rgba(28, 204, 255, 0.8)',
-						borderWidth: 1.5,
-					},
-					emphasis: { areaColor: 'rgba(2, 16, 43, 0.8)', label: { color: '#fff' } },
-				},
-			},
 			{
 				type: 'effectScatter',
 				coordinateSystem: 'geo',

@@ -1,7 +1,11 @@
 <script lang="ts" setup>
+import { useEventListener } from '@vueuse/core'
+
 const data = shallowRef<DashboardData>()
 
 onMounted(() => {
+	setRemUnit()
+
 	api().then((json) => {
 		data.value = json
 	})
@@ -13,6 +17,10 @@ onMounted(() => {
 			})
 		}, 3000)
 	}
+})
+
+useEventListener('resize', () => {
+	setRemUnit()
 })
 </script>
 

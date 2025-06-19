@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
+import { useElementSize } from '@vueuse/core'
 
-const chartRef = ref(null)
+const chartRef = useTemplateRef('chartRef')
 let chartInstance: echarts.ECharts | null = null
 
 const registerChinaMap = () => {
@@ -120,6 +121,23 @@ const initChart = () => {
 		},
 		series: [
 			{
+				type: 'map',
+				mapType: 'china',
+				aspectScale: 0.85,
+				layoutCenter: ['50%', '50%'],
+				layoutSize: '100%',
+				zoom: 1,
+				scaleLimit: { min: 1, max: 2 },
+				itemStyle: {
+					normal: {
+						areaColor: '#0c274b',
+						borderColor: '#1cccff',
+						borderWidth: 1.5,
+					},
+					emphasis: { areaColor: '#02102b', label: { color: '#fff' } },
+				},
+			},
+			{
 				name: '首都',
 				type: 'scatter',
 				coordinateSystem: 'geo',
@@ -170,19 +188,20 @@ const initChart = () => {
 	chartInstance.setOption(option)
 }
 
-const handleResize = () => {
-	chartInstance?.resize()
-	console.log('resize')
-}
-
 onMounted(() => {
 	initChart()
-	window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
 	chartInstance?.dispose()
-	window.removeEventListener('resize', handleResize)
+})
+
+const { width, height } = useElementSize(chartRef)
+
+watch([width, height], () => {
+	if (chartInstance) {
+		chartInstance.resize()
+	}
 })
 </script>
 

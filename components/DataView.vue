@@ -5,6 +5,14 @@ onMounted(() => {
 	api().then((json) => {
 		data.value = json
 	})
+
+	if (import.meta.env.PROD) {
+		setInterval(() => {
+			api().then((json) => {
+				data.value = json
+			})
+		}, 3000)
+	}
 })
 </script>
 

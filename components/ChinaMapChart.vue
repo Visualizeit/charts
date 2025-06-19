@@ -5,7 +5,7 @@ import { useElementSize } from '@vueuse/core'
 import chinaJSON from '~/utils/chinaJSON'
 
 const chartRef = useTemplateRef('chartRef')
-let chartInstance: any = null
+let chartInstance = null
 
 const registerChinaMap = () => {
 	echarts.registerMap('china', chinaJSON)
@@ -163,24 +163,8 @@ const initChart = () => {
 				.map((item) => ({
 					name: item.name,
 					itemStyle: {
-						areaColor: {
-							type: 'linear',
-							x: 0,
-							y: 0,
-							x2: 1,
-							y2: 1,
-							colorStops: [
-								{
-									offset: 0,
-									color: '#658D9300',
-								},
-								{
-									offset: 1,
-									color: '#93EBF821',
-								},
-							],
-						},
-						borderColor: '#24C1F7FF',
+						areaColor: getColorByValue(item.value),
+						borderColor: '#fff',
 						borderWidth: 1,
 					},
 				}))
@@ -254,16 +238,13 @@ const initChart = () => {
 				zlevel: 3,
 				effect: {
 					show: true,
-					period: 4,
-					trailLength: 0.4,
-					color: '#4FB6D2FF',
-					symbolSize: 7,
+					period: 2,
+					trailLength: 0.9,
+					color: '#4FB6D2',
+					symbolSize: 4,
 					symbol: 'arrow',
-					shadowBlur: 10,
-					shadowColor: '#4FB6D2FF',
 				},
 				lineStyle: {
-					color: '#4FB6D2FF',
 					width: 1,
 					curveness: 0.3,
 				},

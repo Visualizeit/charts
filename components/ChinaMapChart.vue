@@ -5,7 +5,7 @@ import { useElementSize } from '@vueuse/core'
 import chinaJSON from '~/utils/chinaJSON'
 
 const chartRef = useTemplateRef('chartRef')
-let chartInstance = null
+let chartInstance: any = null
 
 const registerChinaMap = () => {
 	echarts.registerMap('china', chinaJSON)
@@ -18,22 +18,84 @@ const initChart = () => {
 	chartInstance = echarts.init(chartRef.value)
 
 	const data = [
-		{ name: '北京', value: [116.24, 39.55] },
-		{ name: '深圳', value: [114.271522, 22.753644] },
-		{ name: '重庆', value: [106.54, 29.59] },
-		{ name: '浙江', value: [120.19, 30.26] },
-		{ name: '上海', value: [121.4648, 31.2891] },
+		{ name: '北京', value: [116.24, 39.55, 150] }, // 黄色范围
+		{ name: '广东', value: [114.271522, 22.753644, 800] }, // 红色范围（深圳属于广东）
+		{ name: '重庆', value: [106.54, 29.59, 50] }, // 蓝色范围
+		{ name: '浙江', value: [120.19, 30.26, 300] }, // 黄色范围
+		{ name: '上海', value: [121.4648, 31.2891, 600] }, // 红色范围
 	]
 
-	// 连线数据：从各城市到深圳
+	// 根据数值映射颜色的函数
+	const getColorByValue = (value) => {
+		if (value >= 0 && value <= 100) return '#FD8918' // 蓝色
+		if (value > 100 && value <= 500) return '#F6FD18' // 黄色
+		if (value > 500 && value <= 1000) return '#18DBFD' // 红色
+		return '#FD8918' // 默认蓝色
+	}
+
+	// 地图区域数据，包含颜色映射
+	const mapData = data.map((item) => ({
+		name: item.name,
+		value: item.value[2], // 数值
+		itemStyle: {
+			areaColor: getColorByValue(item.value[2]),
+			borderColor: '#fff',
+			borderWidth: 1,
+		},
+	}))
+
+	// 连线数据：从各城市到深圳（广东）
 	const linesData = [
-		{ coords: [[116.24, 39.55], [114.271522, 22.753644]] }, // 北京到深圳
-		{ coords: [[106.54, 29.59], [114.271522, 22.753644]] }, // 重庆到深圳
-		{ coords: [[120.19, 30.26], [114.271522, 22.753644]] }, // 浙江到深圳
-		{ coords: [[121.4648, 31.2891], [114.271522, 22.753644]] }, // 上海到深圳
+		{
+			coords: [
+				[116.24, 39.55],
+				[114.271522, 22.753644],
+			],
+		}, // 北京到深圳
+		{
+			coords: [
+				[106.54, 29.59],
+				[114.271522, 22.753644],
+			],
+		}, // 重庆到深圳
+		{
+			coords: [
+				[120.19, 30.26],
+				[114.271522, 22.753644],
+			],
+		}, // 浙江到深圳
+		{
+			coords: [
+				[121.4648, 31.2891],
+				[114.271522, 22.753644],
+			],
+		}, // 上海到深圳
 	]
 
 	const option = {
+		visualMap: {
+			type: 'piecewise',
+			min: 0,
+			max: 1000,
+			left: 256,
+			bottom: 120,
+			orient: 'vertical',
+			itemWidth: 20,
+			itemHeight: 14,
+			itemGap: 8,
+			pieces: [
+				{ min: 0, max: 100, color: '#FD8918', label: '500-1000' },
+				{ min: 100, max: 500, color: '#F6FD18', label: '100-500' },
+				{ min: 500, max: 1000, color: '#18DBFD', label: '0-100' },
+			],
+			textStyle: {
+				color: '#fff',
+				fontSize: 12,
+			},
+			itemSymbol: 'rect',
+			showLabel: true,
+			splitNumber: 3,
+		},
 		geo: {
 			map: 'china',
 			aspectScale: 0.85,
@@ -91,6 +153,7 @@ const initChart = () => {
 				layoutSize: '100%',
 				zoom: 1,
 				scaleLimit: { min: 1, max: 2 },
+				data: mapData,
 				itemStyle: {
 					normal: {
 						areaColor: '#0c274b',
@@ -105,11 +168,11 @@ const initChart = () => {
 				coordinateSystem: 'geo',
 				zlevel: 2,
 				symbolSize: 6,
-				rippleEffect: { 
-					period: 4, 
-					scale: 4, 
+				rippleEffect: {
+					period: 4,
+					scale: 4,
 					brushType: 'fill',
-					color: '#ffffff'
+					color: '#ffffff',
 				},
 				label: {
 					normal: {
@@ -129,10 +192,10 @@ const initChart = () => {
 						shadowBlur: 20,
 						shadowColor: '#ffffff',
 					},
-					emphasis: { 
+					emphasis: {
 						color: '#4293b3',
 						shadowBlur: 25,
-						shadowColor: '#4293b3'
+						shadowColor: '#4293b3',
 					},
 				},
 			},
@@ -142,29 +205,30 @@ const initChart = () => {
 				zlevel: 3,
 				effect: {
 					show: true,
-					period: 3,
-					trailLength: 0.4,
-					color: '#4293b3',
-					symbolSize: 6,
+					period: 2,
+					trailLength: 0.8,
+					color: '#00FFFF',
+					symbolSize: 4,
 					symbol: 'arrow',
+					shadowBlur: 10,
+					shadowColor: '#00FFFF',
 				},
 				lineStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
 						{
 							offset: 0,
-							color: '#B0C4DE'
+							color: '#B0C4DE',
 						},
 						{
 							offset: 0.5,
-							color: '#87CEEB'
+							color: '#87CEEB',
 						},
 						{
 							offset: 1,
-							color: '#ADD8E6'
-						}
+							color: '#ADD8E6',
+						},
 					]),
 					width: 1,
-					opacity: 0.4,
 					curveness: 0.3,
 				},
 				data: linesData,

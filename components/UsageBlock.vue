@@ -8,11 +8,15 @@ const props = defineProps<{ data: DashboardData }>()
 	<DataBox title="天使之笔仪器">
 		<div class="grid grid-cols-2">
 			<div class="flex flex-col items-center gap-3">
-				<p class="text-4xl text-blue-400 italic">3221</p>
+				<p class="text-4xl text-blue-400 italic">
+					{{ props.data.device_count }}
+				</p>
 				<p class="text-white">仪器总数</p>
 			</div>
 			<div class="flex flex-col items-center gap-3">
-				<p class="text-4xl text-blue-400 italic">135</p>
+				<p class="text-4xl text-blue-400 italic">
+					{{ props.data.today_use_count }}
+				</p>
 				<p class="text-white">今日使用</p>
 			</div>
 		</div>
@@ -25,7 +29,7 @@ const props = defineProps<{ data: DashboardData }>()
 					<div
 						v-for="(item, index) in props.data.device_store_data"
 						:key="index"
-						class="flex justify-between w-full"
+						class="flex w-full justify-between"
 					>
 						<p>{{ item.store_name }}</p>
 						<p>{{ item.open_times }}/{{ item.total_times }}</p>

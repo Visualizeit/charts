@@ -47,6 +47,28 @@ export interface DeviceStoreData {
 }
 
 /**
+ * 今日加盟商数据-等级
+ */
+export interface FranchiseeLevel {
+	/** 等级名称 */
+	name: string
+	/** 一级分销比例 */
+	first_level: string
+}
+
+/**
+ * 今日加盟商数据
+ */
+export interface TodayFranchiseeData {
+	/** 手机号（脱敏） */
+	mobile: string
+	/** 真实姓名 */
+	realname: string
+	/** 等级 */
+	level_name: FranchiseeLevel
+}
+
+/**
  * 业务数据看板主数据
  */
 export interface DashboardData {
@@ -58,6 +80,8 @@ export interface DashboardData {
 	yesterday_franchisee: number
 	/** 当月加盟商数量 */
 	month_franchisee: number
+	/** 今日加盟商数据 */
+	today_franchisee_data: TodayFranchiseeData[]
 	/** 区域门店数据 */
 	area_data: AreaData[]
 	/** 会员等级概况 */

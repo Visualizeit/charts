@@ -5,8 +5,7 @@ const props = defineProps<{ data: DashboardData }>()
 </script>
 
 <template>
-	<div class="flex flex-col gap-4">
-		<p class="text-center text-2xl text-white">今日新增加盟商列表</p>
+	<DataBox title="今日新增加盟商列表">
 		<div class="max-h-42 overflow-y-auto">
 			<Vue3Marquee class="w-full!" vertical>
 				<div
@@ -42,5 +41,5 @@ const props = defineProps<{ data: DashboardData }>()
 				</div>
 			</Vue3Marquee>
 		</div>
-	</div>
+	</DataBox>
 </template>

@@ -5,7 +5,7 @@ const props = defineProps<{ data: DashboardData }>()
 </script>
 
 <template>
-	<DataBox title="今日新增加盟商列表">
+	<DataBox title="最近新增加盟商">
 		<div class="max-h-42 overflow-y-auto">
 			<Vue3Marquee class="w-full!" vertical>
 				<div

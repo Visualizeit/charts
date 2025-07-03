@@ -85,9 +85,9 @@ const initChart = () => {
 			itemHeight: 14,
 			itemGap: 8,
 			pieces: [
-				{ min: 0, max: 10000, color: '#18DBFD', label: '0-10000' },
-				{ min: 10000, max: 50000, color: '#F6FD18', label: '10000-50000' },
-				{ min: 50000, max: 100000, color: '#FD8918', label: '50000-100000' },
+				{ min: 0, max: 10000, color: '#18DBFD', label: '0-100' },
+				{ min: 10000, max: 50000, color: '#F6FD18', label: '100-300' },
+				{ min: 50000, max: 100000, color: '#FD8918', label: '300-1000' },
 			],
 			textStyle: {
 				color: '#fff',

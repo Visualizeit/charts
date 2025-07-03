@@ -22,7 +22,7 @@ const props = defineProps<{ data: DashboardData }>()
 		</div>
 		<SplitLine />
 		<div class="flex flex-col gap-4 text-white">
-			<p>热门门店（已购/已用）</p>
+			<p>热门门店（已用/已购）</p>
 
 			<div class="max-h-38 overflow-y-auto">
 				<Vue3Marquee class="w-full!" vertical>

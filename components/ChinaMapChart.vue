@@ -11,6 +11,14 @@ const registerChinaMap = () => {
 	echarts.registerMap('china', chinaJSON)
 }
 
+const hexToRgba = (hex: string) => {
+	let r = parseInt(hex.slice(1, 3), 16)
+	let g = parseInt(hex.slice(3, 5), 16)
+	let b = parseInt(hex.slice(5, 7), 16)
+	let a = hex.length === 9 ? parseInt(hex.slice(7, 9), 16) / 255 : 1
+	return `rgba(${r},${g},${b},${a})`
+}
+
 const initChart = () => {
 	if (!chartRef.value) return
 
@@ -104,7 +112,7 @@ const initChart = () => {
 			layoutSize: '120%',
 			itemStyle: {
 				normal: {
-					borderColor: '#24C1F7FF',
+					borderColor: hexToRgba('#24C1F7FF'),
 					borderWidth: 1,
 					areaColor: {
 						type: 'linear',
@@ -115,15 +123,15 @@ const initChart = () => {
 						colorStops: [
 							{
 								offset: 0,
-								color: '#658D9300',
+								color: hexToRgba('#658D9300'),
 							},
 							{
 								offset: 1,
-								color: '#93EBF821',
+								color: hexToRgba('#93EBF821'),
 							},
 						],
 					},
-					shadowColor: '#0499CDBF',
+					shadowColor: hexToRgba('#0499CDBF'),
 					shadowOffsetX: -2,
 					shadowOffsetY: 2,
 					shadowBlur: 10,
@@ -138,15 +146,15 @@ const initChart = () => {
 						colorStops: [
 							{
 								offset: 0,
-								color: '#658D9300',
+								color: hexToRgba('#658D9300'),
 							},
 							{
 								offset: 1,
-								color: '#93EBF821',
+								color: hexToRgba('#93EBF821'),
 							},
 						],
 					},
-					borderColor: '#24C1F7FF',
+					borderColor: hexToRgba('#24C1F7FF'),
 					borderWidth: 1,
 				},
 			},
@@ -156,7 +164,7 @@ const initChart = () => {
 					fontSize: 12,
 					color: '#FFFFFF',
 				},
-				backgroundColor: '#00000061',
+				backgroundColor: hexToRgba('#00000061'),
 				borderWidth: 0,
 			},
 			regions: mapData
@@ -181,15 +189,15 @@ const initChart = () => {
 								colorStops: [
 									{
 										offset: 0,
-										color: '#658D9300',
+										color: hexToRgba('#658D9300'),
 									},
 									{
 										offset: 1,
-										color: '#93EBF821',
+										color: hexToRgba('#93EBF821'),
 									},
 								],
 							},
-							borderColor: '#24C1F7FF',
+							borderColor: hexToRgba('#24C1F7FF'),
 							borderWidth: 1,
 						},
 					},

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useEventListener } from '@vueuse/core'
+import { useEventListener, useFullscreen } from '@vueuse/core'
 
 const data = shallowRef<DashboardData>()
 
@@ -22,6 +22,8 @@ onMounted(() => {
 useEventListener('resize', () => {
 	setRemUnit()
 })
+
+const { toggle } = useFullscreen()
 </script>
 
 <template>
@@ -30,6 +32,7 @@ useEventListener('resize', () => {
 	>
 		<h1
 			class="absolute top-8 left-1/2 -translate-x-1/2 transform text-5xl tracking-widest text-white"
+			@click="toggle()"
 		>
 			趣爱眼智慧数据中心
 		</h1>

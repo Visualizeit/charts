@@ -24,6 +24,10 @@ useEventListener('resize', () => {
 })
 
 const { toggle } = useFullscreen()
+
+useEventListener('dblclick', () => {
+	toggle()
+})
 </script>
 
 <template>
